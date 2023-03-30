@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Умный дом</title>
+
+      <link href="{{ url_for('static', filename='dist/bootstrap-5.0.2-dist/css/bootstrap.min.css') }}" rel="stylesheet">
+      <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+  </head>
+  <body>
+    <h1 class="p-3 mb-2 bg-primary text-white">Умный дом</h1>
+    <p>Текущая температура: {{ data['temperature'] }}</p>
+    <p>Текущая влажность: {{ data['humidity'] }}</p>
+    <h2 class="p-3 mb-2 bg-info text-white">Счетчики</h2>
+    <ul>
+      <li>Электричество:</li>
+      <ul>
+        <li>Показания: {{ data['meter']['electricity']['reading'] }}</li>
+        <li>Потребление: {{ data['meter']['electricity']['consumption'] }}</li>
+      </ul>
+      <li>Газ:</li>
+      <ul>
+        <li>Показания: {{ data['meter']['gas']['reading'] }}</li>
+        <li>Потребление: {{ data['meter']['gas']['consumption'] }}</li>
+      </ul>
+      <li>Вода:</li>
+      <ul>
+        <li>Показания: {{ data['meter']['water']['reading'] }}</li>
+        <li>Потребление: {{ data['meter']['water']['consumption'] }}</li>
+      </ul>
+    </ul>
+    {% if data['boiler']['isRun'] %}
+    <p>Котел работает</p>
+    <p>Температура котла: {{ data['boiler']['temperature'] }}</p>
+    <p>Давление котла: {{ data['boiler']['pressure'] }}</p>
+    {% else %}
+    <p>Котел выключен</p>
+    {% endif %}
+  </body>
+</html>
+
